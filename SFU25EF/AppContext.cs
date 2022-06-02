@@ -11,14 +11,19 @@ namespace SFU25EF
         // Объекты таблицы Users
         public DbSet<User> Users { get; set; }
 
+        // Объекты таблицы Companies
+        public DbSet<Company> Companies { get; set; }
+
         public AppContext()
         {
+            Database.EnsureDeleted();
             Database.EnsureCreated();
         }
 
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Ваша строка подключения к БД");
+            optionsBuilder.UseSqlServer(@"Data Source = OFLT-EAPR5KFR\SQLEXPRESS; Database=EF; Trusted_Connection=True;");
         }
     }
 }

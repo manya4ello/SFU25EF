@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 
 namespace SFU25EF
 {
@@ -6,7 +7,12 @@ namespace SFU25EF
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            using (var db = new AppContext())
+            {
+
+
+                //db.SaveChanges();
+            }
         }
     }
 }

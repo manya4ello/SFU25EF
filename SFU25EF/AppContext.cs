@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using Microsoft.EntityFrameworkCore;
-
+using SFU25EF.Entities;
 
 namespace SFU25EF
 {
@@ -12,11 +12,15 @@ namespace SFU25EF
         public DbSet<User> Users { get; set; }
 
         // Объекты таблицы Companies
-        public DbSet<Company> Companies { get; set; }
+        public DbSet<Book> Books { get; set; }
+
+        public DbSet<Author> Authors { get; set; }
+
+        public DbSet<Genre> Genres { get; set; }
 
         public AppContext()
         {
-            Database.EnsureDeleted();
+            //Database.EnsureDeleted();
             Database.EnsureCreated();
         }
 

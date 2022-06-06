@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using SFU25EF.Entities;
 
 namespace SFU25EF
@@ -17,7 +18,8 @@ namespace SFU25EF
         {
             using (var db = new AppContext())
             {
-                return db.Books.ToList();
+                
+                return db.Books.Include(x => x.Genres).ToList();
             }
         }
 
@@ -30,7 +32,7 @@ namespace SFU25EF
         {
             using (var db = new AppContext())
             {
-                return db.Books.Where(c=>c.Id ==id).FirstOrDefault();
+                return db.Books.Include(x => x.Genres).Where(c=>c.Id ==id).FirstOrDefault();
             }
         }
 
@@ -43,7 +45,7 @@ namespace SFU25EF
         {
             using (var db = new AppContext())
             {
-                return db.Books.Where(c => c.Title == title).FirstOrDefault();
+                return db.Books.Include(x => x.Genres).Where(c => c.Title == title).FirstOrDefault();
             }
         }
 
@@ -98,7 +100,7 @@ namespace SFU25EF
             using (var db = new AppContext())
             {
                
-               return db.Books.Where(c => c.Year >= firstyear && c.Year <= lastyear && c.Genres.Contains(genre)).ToList();
+               return db.Books.Include(x => x.Genres).Where(c => c.Year >= firstyear && c.Year <= lastyear && c.Genres.Contains(genre)).ToList();
                
             }
         }
@@ -113,7 +115,7 @@ namespace SFU25EF
         {
             using (var db = new AppContext())
             {
-                return db.Books.Where(c => c.Author == author).Count();
+                return db.Books.Include(x => x.Genres).Where(c => c.Author == author).Count();
 
             }
         }
@@ -126,7 +128,7 @@ namespace SFU25EF
         {
             using (var db = new AppContext())
             {
-                return db.Books.Where(c => c.Genres.Contains(genre)).Count();
+                return db.Books.Include(x => x.Genres).Where(c => c.Genres.Contains(genre)).Count();
 
             }
         }
@@ -166,7 +168,7 @@ namespace SFU25EF
         {
             using (var db = new AppContext())
             {
-                return db.Books.OrderBy(c => c.Title).ToList();
+                return db.Books.Include(x => x.Genres).OrderBy(c => c.Title).ToList();
             }
         }
 
@@ -178,7 +180,7 @@ namespace SFU25EF
         {
             using (var db = new AppContext())
             {
-                return db.Books.OrderByDescending(c => c.Year).ToList();
+                return db.Books.Include(x => x.Genres).OrderByDescending(c => c.Year).ToList();
             }
         }
     }

@@ -23,9 +23,9 @@ namespace SFU25EF
             foreach (var book in bookrepositary.GetAllBooks())
             {
                 Console.Write($"ID-{book.Id}, название: {book.Title}, год написания: {book.Year}, " +
-                    $"Автор: {authorrepositary.GetAuthorByID(book.AuthorID).SecondName}. Жанры:{book.Genres.Count()}");
+                    $"Автор: {authorrepositary.GetAuthorByID(book.AuthorID).SecondName}. Жанры:");
                 foreach (var genere in book.Genres)
-                    Console.Write($"\t{genrerepositary.GetGenreByID(genere.Id).Description}");
+                    Console.Write($"\t{genere.Description}");
                 Console.WriteLine();
             }
 
@@ -72,7 +72,7 @@ namespace SFU25EF
             foreach (var book in bookrepositary.GetAllBooksSortedByTitle())
             {
                 Console.Write($"ID-{book.Id}, название: {book.Title}, год написания: {book.Year}, " +
-                    $"Автор: {authorrepositary.GetAuthorByID(book.AuthorID).SecondName}. Жанры:{book.Genres.Count()}");
+                    $"Автор: {authorrepositary.GetAuthorByID(book.AuthorID).SecondName}. Жанры:");
                 foreach (var genere in book.Genres)
                     Console.Write($"\t{genere.Description}");
                 Console.WriteLine();
@@ -82,9 +82,22 @@ namespace SFU25EF
             foreach (var book in bookrepositary.GetAllBooksSortedByYearDesc())
             {
                 Console.Write($"ID-{book.Id}, название: {book.Title}, год написания: {book.Year}, " +
-                    $"Автор: {authorrepositary.GetAuthorByID(book.AuthorID).SecondName}. Жанры:{book.Genres.Count()}");
+                    $"Автор: {authorrepositary.GetAuthorByID(book.AuthorID).SecondName}. Жанры:");
                 foreach (var genere in book.Genres)
                     Console.Write($"\t{genere.Description}");
+                Console.WriteLine();
+            }
+
+            Console.WriteLine("12. Получение кол-ва книг по жанрам:");
+            var genres = genrerepositary.GetAllGenres();
+            foreach (var genre in genres)
+                Console.WriteLine($"{genre.Description}: {bookrepositary.CountBooksOfGenere(genre)} кн.");
+
+            Console.WriteLine($"13. Книги, вышедшие между 1840 и 1900, жанра {genrerepositary.GetGenreByID(1).Description}:");
+            foreach (var book in bookrepositary.GetBooksOfGenreBtwYears(genrerepositary.GetGenreByID(1),1840,1900))
+            {
+                Console.Write($"ID-{book.Id}, название: {book.Title}, год написания: {book.Year}, " +
+                    $"Автор: {authorrepositary.GetAuthorByID(book.AuthorID).SecondName}.");
                 Console.WriteLine();
             }
 
@@ -93,6 +106,13 @@ namespace SFU25EF
             {
                 Console.WriteLine($"Имя: { user.Name}, кол-во книг на руках: {userrepositary.CountBooksRentedByUser(user)}");
             }
+
+            Console.Write($"21. Есть ли на руках");
+            var user21 = userrepositary.GetUserByID(1);
+            var book21 = bookrepositary.GetBookByID(1);
+            Console.WriteLine($" у пользователя {user21.Name} книга {book21.Title}: {userrepositary.FlagIfBookRentedByUser(user21,book21)}");
+
+
 
             Console.WriteLine("Нажмите любую кнопку");
             Console.ReadKey();

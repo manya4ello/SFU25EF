@@ -41,10 +41,10 @@ namespace SFU25EF
                 var book4 = new Book { Title = "Сказка о царе Салтане", Year = 1831 };
 
 
-                book1.Author = author1;
-                book2.Author = author1;
-                book3.Author = author2;
-                book4.Author = author2;
+                book1.Author = author2;
+                book2.Author = author2;
+                book3.Author = author1;
+                book4.Author = author1;
 
                 genre4.Books.Add(book4);
                 genre1.Books.Add(book1);

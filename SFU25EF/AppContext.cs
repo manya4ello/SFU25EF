@@ -18,6 +18,7 @@ namespace SFU25EF
 
         public DbSet<Genre> Genres { get; set; }
 
+       
         public AppContext()
         {
             //Database.EnsureDeleted();
